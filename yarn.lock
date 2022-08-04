@@ -7394,6 +7394,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"preact@npm:^10.10.0":
+  version: 10.10.0
+  resolution: "preact@npm:10.10.0"
+  checksum: ec34f0e7a8677080debb5e7035a749d30a23694a68389e6f577e051e91a1e1014913c56845a615d1f9a4f2cd0321c46faaded4d4a0457c755d637a3a811fd69e
+  languageName: node
+  linkType: hard
+
 "prelude-ls@npm:^1.2.1":
   version: 1.2.1
   resolution: "prelude-ls@npm:1.2.1"
@@ -9817,6 +9824,7 @@ __metadata:
     npm-run-all: ^4.1.5
     pino-pretty: ^7.3.0
     postcss-syntax: ^0.36.2
+    preact: ^10.10.0
     prettier: ^2.5.1
     react: ^17.0.2
     react-dom: ^17.0.2
