@@ -66,17 +66,17 @@ export const apiRoute = async (fastify) => {
     if (since != null && until != null) {
       Object.assign(where, {
         startAt: Between(
-          since.utc().format("YYYY-MM-DD HH:mm:ss"),
-          until.utc().format("YYYY-MM-DD HH:mm:ss"),
+          since.utc().format("yyyy-MM-dd HH:mm:ss"),
+          until.utc().format("yyyy-MM-dd HH:mm:ss"),
         ),
       });
     } else if (since != null) {
       Object.assign(where, {
-        startAt: MoreThanOrEqual(since.utc().format("YYYY-MM-DD HH:mm:ss")),
+        startAt: MoreThanOrEqual(since.utc().format("yyyy-MM-dd HH:mm:ss")),
       });
     } else if (until != null) {
       Object.assign(where, {
-        startAt: LessThanOrEqual(since.utc().format("YYYY-MM-DD HH:mm:ss")),
+        startAt: LessThanOrEqual(since.utc().format("yyyy-MM-dd HH:mm:ss")),
       });
     }
 
