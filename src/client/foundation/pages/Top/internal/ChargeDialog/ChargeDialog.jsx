@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import React, { forwardRef, useCallback, useState } from "react";
+import styled from "styled-components";
 
 import { Dialog } from "../../../../components/layouts/Dialog";
 import { Spacer } from "../../../../components/layouts/Spacer";
@@ -9,9 +9,23 @@ import { useMutation } from "../../../../hooks/useMutation";
 import { useFetch } from "../../../../hooks/useFetch";
 import { Space } from "../../../../styles/variables";
 import { jsonFetcher } from "../../../../utils/HttpUtils";
+import { keyframes } from "styled-components";
 
 const CANCEL = "cancel";
 const CHARGE = "charge";
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const Animation = styled.div`
+  animation: ${fadeIn} 0.8s ease-in-out;
+`;
 
 /**
  * @typedef Props
@@ -98,11 +112,7 @@ export const ChargeDialog = forwardRef(({ onComplete }, ref) => {
               ))}
             </datalist>
 
-            {bank != null && (
-              <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
-                銀行名: {bank.name}銀行
-              </motion.div>
-            )}
+            {bank != null && <Animation>銀行名: {bank.name}銀行</Animation>}
 
             <label>
               支店コード
@@ -122,11 +132,7 @@ export const ChargeDialog = forwardRef(({ onComplete }, ref) => {
                 ))}
             </datalist>
 
-            {branch && (
-              <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
-                支店名: {branch.name}
-              </motion.div>
-            )}
+            {branch && <Animation>支店名: {branch.name}</Animation>}
 
             <label>
               口座番号
