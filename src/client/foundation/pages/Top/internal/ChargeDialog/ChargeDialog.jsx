@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
 import React, { forwardRef, useCallback, useState } from "react";
-import zenginCode from "zengin-code";
 
 import { Dialog } from "../../../../components/layouts/Dialog";
 import { Spacer } from "../../../../components/layouts/Spacer";
 import { Stack } from "../../../../components/layouts/Stack";
 import { Heading } from "../../../../components/typographies/Heading";
 import { useMutation } from "../../../../hooks/useMutation";
+import { useFetch } from "../../../../hooks/useFetch";
 import { Space } from "../../../../styles/variables";
+import { jsonFetcher } from "../../../../utils/HttpUtils";
 
 const CANCEL = "cancel";
 const CHARGE = "charge";
@@ -23,6 +24,13 @@ export const ChargeDialog = forwardRef(({ onComplete }, ref) => {
   const [branchCode, setBranchCode] = useState("");
   const [accountNo, setAccountNo] = useState("");
   const [amount, setAmount] = useState(0);
+
+  const bankListRes = useFetch("/api/bank/list", jsonFetcher);
+  const bankList = bankListRes.data?.bankList;
+
+  const bankRes = useFetch(`/api/bank/${bankCode}`, jsonFetcher);
+  const bank = bankRes.data?.bank;
+  const branch = bank?.branches[branchCode];
 
   const clearForm = useCallback(() => {
     setBankCode("");
@@ -67,13 +75,6 @@ export const ChargeDialog = forwardRef(({ onComplete }, ref) => {
     [charge, bankCode, branchCode, accountNo, amount, onComplete, clearForm],
   );
 
-  const bankList = Object.entries(zenginCode).map(([code, { name }]) => ({
-    code,
-    name,
-  }));
-  const bank = zenginCode[bankCode];
-  const branch = bank?.branches[branchCode];
-
   return (
     <Dialog ref={ref} onClose={handleCloseDialog}>
       <section>
@@ -92,7 +93,7 @@ export const ChargeDialog = forwardRef(({ onComplete }, ref) => {
             </label>
 
             <datalist id="ChargeDialog-bank-list">
-              {bankList.map(({ code, name }) => (
+              {bankList?.map(({ code, name }) => (
                 <option key={code} value={code}>{`${name} (${code})`}</option>
               ))}
             </datalist>
