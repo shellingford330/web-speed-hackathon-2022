@@ -42,6 +42,7 @@ server.addHook("onRequest", async (req, res) => {
   res.header("Connection", "close");
 });
 
+server.register(import("@fastify/compress"), { encodings: ["gzip"] });
 server.register(apiRoute, { prefix: "/api" });
 server.register(spaRoute);
 
