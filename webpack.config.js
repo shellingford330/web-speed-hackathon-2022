@@ -65,8 +65,8 @@ module.exports = [
       new CopyPlugin({
         patterns: [{ from: PUBLIC_ROOT, to: DIST_PUBLIC }],
       }),
-      // new CompressionPlugin(),
-      new BundleAnalyzerPlugin(),
+      new CompressionPlugin(),
+      // new BundleAnalyzerPlugin(),
     ],
     resolve: {
       extensions: [".js", ".jsx"],
