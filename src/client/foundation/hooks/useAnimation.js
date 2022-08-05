@@ -45,10 +45,10 @@ export function useAnimation({ duration, end, start, timingFunction }) {
       const percentage = timingFunction(elapsed / duration);
       setValue(start + (end - start) * percentage);
 
-      timer.current = setTimeout(tick, 100);
+      timer.current = setTimeout(tick, 1000);
     };
 
-    timer.current = setTimeout(tick, 100);
+    timer.current = setTimeout(tick, 1000);
   }, [start, end, duration, timingFunction]);
 
   const abortAnimation = useCallback(() => {
